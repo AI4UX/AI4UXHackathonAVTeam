@@ -4,3 +4,5 @@ instance/htmlfi/
 ModelRF.joblib
 
 modelBuilding/screens5000plus/
+
+modelBuilding/__pycache__/
