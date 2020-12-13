@@ -10,5 +10,6 @@ Here's how you can rate your app.
 Our AI utilizes data from >30,000 Google Store mobile applications, and all the applications have >100,000 downloads. These are applications includes Facebook, Slack, Livongo. We feed our model with the screenshots of the application with the final Google Store user rating. Our model will process each image, analyze the app's UI, and receive its user rating.
 In the future, we can implement more data points and higher resolution images into our AI model. With more engineering resources, we can also expand the AI model algorithm to recognize the color, readability of text, and even the app's contents to be apart of our complete evaluation. With a more complex database, we can even predict other UX KPI like sessions length, session interval, session depth, average screens per visit, etc. Our AI can provide a data-driven, non-bias, and non-emotional evaluation of the app.
 
-pip install requirements.txt
-python3 manage.py
+- pip install requirements.txt
+
+- python3 manage.py
