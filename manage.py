@@ -18,7 +18,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
-    print("upload attempt")
+  
     
     if request.method == 'POST':
         f = request.files['file'] 
@@ -27,9 +27,9 @@ def upload_file():
         dirList = os.listdir('uploads/')
         
         filename = secure_filename(f.filename)
-        print('tring ' + filename)
+       
         if Path(filename).suffix == ".png" or Path(filename).suffix == ".jpg" or Path(filename).suffix == ".jpeg":
-            print('yay ' + filename)
+           
             
             
             #f.save(filename) # secure_filename('app' + str(imgNum) + Path(f.filename).suffix)
@@ -45,55 +45,62 @@ def upload_file():
 @app.route('/score', methods = ['GET', 'POST'])
 def request_score():
 
-    print("request attempt")
+  
     if request.method == 'GET':
-        print('ok wait')
+       
         time.sleep(3)
         
 
-        print("GET METHOD")
+       
         index = 0
         dir = app.instance_path +'/htmlfi'
         for filename in os.listdir(dir):
-            print("FILE NAME IN FILES " + filename)
+           
             fileType = Path(filename).suffix
             os.rename(app.instance_path +'\\htmlfi' + '\\' + filename, app.instance_path +'\\htmlfi' + '\\' + 'appImg' + str(index) + fileType)
-            print('renaming')
+           
             index += 1
 
-        print("GETTING")
+       
         appId = "appImg"
         dir = app.instance_path +'/htmlfi'
         
 
         singleAppImageData = returnSplitImagesOfApp(appId, dir)
 
-        print('returnSplitImagesOfApp()')
-        print(appId)
+       
         for a in singleAppImageData:
-            #print('\na ')
-            #print(a)
+          
             for b in singleAppImageData[a]:
-                #print('\nb')
-                #print(b)
+                
                 for c in singleAppImageData[a][b]:
-                    #print('\nc')
-                    #print(c)
+                  
                     for d in c:
-                        #print('\nd')
-                        #print(c[d])
-                        print('\n' + d)
+                       
                         index = 0
                         for e in range(len(c[d])):
                             croppedImg = c[d][e]
                             print('index ' + str(index))
-                            cv2.destroyAllWindows()
-                            cv2.imshow('croppedImg', croppedImg) 
-                            cv2.waitKey(1)
-                            time.sleep(0.5)  
+                            #cv2.destroyAllWindows()
+                            #cv2.imshow('croppedImg', croppedImg) 
+                            #cv2.waitKey(1)
+                            #time.sleep(0.5)  
                             index += 1
 
-                            ##################################################################
+                            # ------------------- Cropped Image Analysis
+
+
+
+
+
+
+
+
+
+
+
+
+                            # ------------------- 
 
                             
        
@@ -105,8 +112,5 @@ def hello():
     return render_template("welcome.html")
 
 
-print(app.url_map)
-
 if __name__ == "__main__":
     app.run()
-
