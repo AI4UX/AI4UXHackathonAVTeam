@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 from flask import Flask, redirect, url_for
 from flask import Flask, render_template
 from flask import Flask, render_template, request
@@ -89,8 +89,10 @@ def request_score():
                             croppedImgs.append(croppedImg) 
                             index += 1
 
-        shutil.rmtree(dir)          
-        return ScorePrediction.getScore(croppedImgs)
+        shutil.rmtree(dir)   
+        resp = Response(ScorePrediction.getScore(croppedImgs), )       
+        resp.headers["Access-Control-Allow-Origin"] = "*"
+        return resp
     return 'no data'
 
 @app.route('/', methods=['GET', 'POST'])
