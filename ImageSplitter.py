@@ -12,9 +12,9 @@ imageDirectory = 'uploads'
 
 imgViewSets = [
                 [1, 5], 
-                [2, 4], # [horizontalPartitions, verticalPartitions]
-                #[1, 4], 
-                #[5, 5]
+                [4, 4], # [horizontalPartitions, verticalPartitions]
+                [5, 5], 
+                [5, 1]
                 ]
 
 # - - - - - - - - - - - - - - 

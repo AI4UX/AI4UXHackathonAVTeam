@@ -3,6 +3,7 @@ from flask import Flask, redirect, url_for
 from flask import Flask, render_template
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+import ScorePrediction
 from werkzeug.datastructures import  FileStorage
 from pathlib import Path
 import os
@@ -68,7 +69,7 @@ def request_score():
 
         singleAppImageData = returnSplitImagesOfApp(appId, dir)
 
-       
+        croppedImgs = []
         for a in singleAppImageData:
           
             for b in singleAppImageData[a]:
@@ -84,28 +85,13 @@ def request_score():
                             #cv2.destroyAllWindows()
                             #cv2.imshow('croppedImg', croppedImg) 
                             #cv2.waitKey(1)
-                            #time.sleep(0.5)  
+                            #time.sleep(0.5) 
+                            croppedImgs.append(croppedImg) 
                             index += 1
 
-                            # ------------------- Cropped Image Analysis
-
-
-
-
-
-
-
-
-
-
-
-
-                            # ------------------- 
-
                             
-       
-        shutil.rmtree(dir)
-    return 'good'
+        return ScorePrediction.getScore(croppedImgs)
+    return 'no data'
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
