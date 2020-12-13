@@ -45,6 +45,16 @@ blockquote, q {
 		content: none;
 	}
 
+background {
+	width: 100%;
+	position: absolute;
+	top: -100;
+	left: 0;
+	height: 100%;
+	z-index: -150;
+
+	}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
