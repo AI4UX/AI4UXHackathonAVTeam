@@ -156,10 +156,10 @@
   	evnt.preventDefault();
     fileList.forEach(function (file) {
     	sendFile(file);
-      setTimeout(function(){console.log('Sent image')}, 500);
+      setTimeout(function(){console.log('sent image')}, 500);
     });
 
-    setTimeout(function(){console.log('Sent image')}, 1000);
+    setTimeout(function(){console.log('awaiting score')}, 1000);
     requestScore()
     
   });
@@ -199,12 +199,11 @@
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = req.responseText
-            console.log('done')
+            console.log('score calculated')
             console.log(response)
       };
    }
  
-    console.log(score);
   };
 })();
 
