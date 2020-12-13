@@ -4,6 +4,7 @@ import numpy as np
 from joblib import dump, load
 
 
+clf = load("ModelRF.joblib")
 bins             = 8
 
 # feature-descriptor-1: Hu Moments
@@ -53,17 +54,11 @@ def getScore(images):
         ###################################
         global_feature = np.hstack([fv_histogram, fv_haralick, fv_hu_moments])
 
-        # scale features in the range (0-1)
-        clf = load("ModelRF.joblib")
-        print(clf.classes_)
         # predict label of test image
         prediction = clf.predict(global_feature.reshape(1,-1))[0]
-        print(prediction)
         prediction_proba = clf.predict_proba(global_feature.reshape(1,-1))[0]
-        print(prediction_proba)
         labels = [x for x in np.arange(1.2, 5, 0.1)]
         prediction = labels[prediction]
-        print(prediction)
         idx = 0
         for prediction_p in prediction_proba:
             cr = prediction_proba[idx] * labels[idx]
@@ -78,5 +73,4 @@ def getScore(images):
         # # # display the output image
         # plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
         # plt.show()
-    print(str(total / imageCount))
     return str(total / imageCount)
