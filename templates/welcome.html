@@ -1,0 +1,141 @@
+
+
+<html>
+<head>
+
+  	<style>
+    h1 {
+      color: black;
+      padding: 1px;
+      font-size: 3.5vw;
+      margin-right: 120px;
+ 	  	margin-left: 80px;
+      font-family:'Garamond', Times, sans-serif;
+      
+    }
+
+    h2 {
+      color: black;
+      padding: 1px;
+      font-size: 1.2vw;
+      margin-right: 120px;
+ 	  	margin-left: 80px;
+       font-family:'Garamond', Times, sans-serif;
+      
+    }
+    
+    p {
+      color: black;
+      padding: 25px;
+      font-size: 1vw;
+      margin-right: 420px;
+ 	  	margin-left: 80px;
+       font-family:'Garamond', Times, sans-serif;
+      
+    }
+    
+]
+
+  </style> 
+
+</head>
+<body>
+
+  
+
+  <h1 >AI 4 UX Hackathon - A.V. Team</h1>
+  <h2 >Our AI technology will predict the User Rating for your app based on its UI.</h2>
+  <p >
+    Upload a screenshot of your app, and our AI will provide an unbiased prediction of your app's user rating.<br>
+    Our model analyzed > 30k famous mobile applications like Facebook, Slack, Livongo, and more! Yes!
+  </p>
+  
+
+
+  <form id='file-catcher' action = "http://127.0.0.1:5000/uploader" method = "POST" 
+  enctype = "multipart/form-data">
+    <input id='file-input' type='file' multiple/>
+    <button type='submit'>
+      Submit
+    </button>
+  </form>
+  
+  <div id='file-list-display'></div>
+
+<script>
+
+(function () {
+	var fileCatcher = document.getElementById('file-catcher');
+  var fileInput = document.getElementById('file-input');
+  var fileListDisplay = document.getElementById('file-list-display');
+  
+  var fileList = [];
+  var renderFileList, sendFile;
+  
+  fileCatcher.addEventListener('submit', function (evnt) {
+  	evnt.preventDefault();
+    fileList.forEach(function (file) {
+    	sendFile(file);
+      setTimeout(function(){console.log('Sent image')}, 500);
+    });
+
+    setTimeout(function(){console.log('Sent image')}, 1000);
+    requestScore()
+    
+  });
+  
+  fileInput.addEventListener('change', function (evnt) {
+ 		fileList = [];
+  	for (var i = 0; i < fileInput.files.length; i++) {
+    	fileList.push(fileInput.files[i]);
+    }
+    renderFileList();
+  });
+  
+  renderFileList = function () {
+  	fileListDisplay.innerHTML = '';
+    fileList.forEach(function (file, index) {
+    	var fileDisplayEl = document.createElement('p');
+      fileDisplayEl.innerHTML = (index + 1) + ': ' + file.name;
+      fileListDisplay.appendChild(fileDisplayEl);
+    });
+  };
+  
+  sendFile = function (file) {
+  	var formData = new FormData();
+    var request = new XMLHttpRequest();
+ 
+    formData.set('file', file);
+    request.open("POST", 'http://127.0.0.1:5000/uploader');
+    request.send(formData);
+  };
+
+  requestScore = function () {
+  	var req = new XMLHttpRequest();
+ 
+    req.open("GET", 'http://127.0.0.1:5000/score');
+    req.send();
+
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = req.responseText
+            console.log('done')
+            console.log(response)
+      };
+   }
+ 
+    console.log(score);
+  };
+})();
+
+
+
+</script>
+
+    
+    
+
+
+
+</body>
+</html>
