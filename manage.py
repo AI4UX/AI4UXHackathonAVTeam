@@ -89,7 +89,7 @@ def request_score():
                             croppedImgs.append(croppedImg) 
                             index += 1
 
-                            
+        shutil.rmtree(dir)          
         return ScorePrediction.getScore(croppedImgs)
     return 'no data'
 
